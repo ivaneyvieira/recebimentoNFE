@@ -1,6 +1,7 @@
 package com.vaadin.pwademo
 
 import com.github.vok.karibudsl.flow.div
+import com.helger.commons.debug.GlobalDebug
 import com.vaadin.flow.component.HasElement
 import com.vaadin.flow.component.dependency.HtmlImport
 import com.vaadin.flow.component.html.Div
@@ -12,6 +13,7 @@ import com.vaadin.flow.router.RouterLayout
 import com.vaadin.flow.theme.Theme
 import com.vaadin.flow.theme.lumo.Lumo
 import com.vaadin.pwademo.components.*
+import javax.servlet.annotation.WebServlet
 
 @BodySize(width = "100vw", height = "100vh")
 @HtmlImport("frontend://styles.html")
@@ -32,8 +34,13 @@ class MainLayout : AppHeaderLayout(), RouterLayout {
       }
     }
     appDrawer {
-      navMenuItem(VaadinIcon.LIST, "Task List")
-      navMenuItem(VaadinIcon.COG, "Settings")
+      navMenuItem(VaadinIcon.LIST, "Task List") {
+      }
+      navMenuItem(VaadinIcon.COG, "Settings") {
+        addClickListener {
+          println("Teste")
+        }
+      }
       navMenuItem(VaadinIcon.QUESTION, "About")
     }
     content = div {

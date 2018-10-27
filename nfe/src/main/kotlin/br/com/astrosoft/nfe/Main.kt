@@ -1,23 +1,22 @@
-import Config.cnpj2
-import br.com.samuelweb.nfe.Nfe
+package br.com.astrosoft.nfe
+
+import br.com.samuelweb.nfe.NfeWeb
 import br.com.samuelweb.nfe.dom.Enum.StatusEnum
 import br.com.samuelweb.nfe.util.ConstantesUtil
+import br.com.samuelweb.nfe.util.Estados.SP
 import br.com.samuelweb.nfe.util.XmlUtil
-import br.com.samuelweb.nfe.util.model.InfNFe
 import com.fasterxml.jackson.dataformat.xml.XmlMapper
 import org.w3c.dom.NodeList
 import org.xml.sax.InputSource
-import xml.NFeXML
-import xml.NfeProc
 import java.io.StringReader
 import javax.xml.parsers.DocumentBuilderFactory
 import javax.xml.xpath.XPathConstants
 import javax.xml.xpath.XPathFactory
 
 fun main(args: Array<String>) {
-  Config.iniciaConfiguracoes()
+  val config = Config.iniciaConfiguracoes(SP)
   val chave = "4318 0893 6828 5400 0186 5500 1000 0333 7519 1155 4380".replace(" ", "")
-  val retorno = Nfe.distribuicaoDfe(ConstantesUtil.TIPOS.CNPJ, cnpj2, ConstantesUtil.TIPOS.CHAVE, chave)
+  val retorno = NfeWeb.distribuicaoDfe(config, ConstantesUtil.TIPOS.CNPJ, "cnpj", ConstantesUtil.TIPOS.CHAVE, chave)
   println("Status:" + retorno.cStat)
   println("Motivo:" + retorno.xMotivo)
   println("NSU:" + retorno.ultNSU)
@@ -31,10 +30,8 @@ fun main(args: Array<String>) {
       println("Schema: " + docZip.schema)
       println("NSU:" + docZip.nsu)
       val xml = XmlUtil.gZipToXml(docZip.value)
-      System.out.println("XML: " + xml)
-//      val nfe = convertXmlString2DataObject(xml, NfeProc::class.java)
-      val nfe = XmlUtil.xmlToObject(xml, NFeXML::class.java)
-      println(nfe)
+      System.out.println("XML: $xml")
+
 
       val dbFactory = DocumentBuilderFactory.newInstance()
       val dBuilder = dbFactory.newDocumentBuilder()
