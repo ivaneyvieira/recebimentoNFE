@@ -1,7 +1,12 @@
-package com.vaadin.pwademo
+package br.com.astrosoft.entradaNF
 
+import br.com.astrosoft.entradaNF.components.AppHeaderLayout
+import br.com.astrosoft.entradaNF.components.appDrawer
+import br.com.astrosoft.entradaNF.components.appHeader
+import br.com.astrosoft.entradaNF.components.appToolbar
+import br.com.astrosoft.entradaNF.components.navMenuItem
+import br.com.astrosoft.entradaNF.components.paperIconButton
 import com.github.vok.karibudsl.flow.div
-import com.helger.commons.debug.GlobalDebug
 import com.vaadin.flow.component.HasElement
 import com.vaadin.flow.component.dependency.HtmlImport
 import com.vaadin.flow.component.html.Div
@@ -12,8 +17,6 @@ import com.vaadin.flow.component.page.Viewport
 import com.vaadin.flow.router.RouterLayout
 import com.vaadin.flow.theme.Theme
 import com.vaadin.flow.theme.lumo.Lumo
-import com.vaadin.pwademo.components.*
-import javax.servlet.annotation.WebServlet
 
 @BodySize(width = "100vw", height = "100vh")
 @HtmlImport("frontend://styles.html")

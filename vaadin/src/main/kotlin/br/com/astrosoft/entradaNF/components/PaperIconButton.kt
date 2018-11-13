@@ -1,4 +1,4 @@
-package com.vaadin.pwademo.components
+package br.com.astrosoft.entradaNF.components
 
 import com.github.vok.karibudsl.flow.VaadinDsl
 import com.github.vok.karibudsl.flow.init
@@ -24,4 +24,4 @@ class PaperIconButton(collection: String, icon: String) : Component(), ClickNoti
 }
 
 fun (@VaadinDsl HasComponents).paperIconButton(icon: VaadinIcon, block: (@VaadinDsl PaperIconButton).() -> Unit = {}) = init(
-    PaperIconButton(icon), block)
+  PaperIconButton(icon), block)

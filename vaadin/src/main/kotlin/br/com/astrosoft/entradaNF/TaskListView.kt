@@ -1,4 +1,4 @@
-package com.vaadin.pwademo
+package br.com.astrosoft.entradaNF
 
 import com.github.vok.karibudsl.flow.*
 import com.vaadin.flow.component.button.Button

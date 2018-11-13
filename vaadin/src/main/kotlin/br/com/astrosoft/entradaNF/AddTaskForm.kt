@@ -1,4 +1,4 @@
-package com.vaadin.pwademo
+package br.com.astrosoft.entradaNF
 
 import com.github.vok.karibudsl.flow.*
 import com.vaadin.flow.component.HasComponents
@@ -42,4 +42,5 @@ class AddTaskForm : HorizontalLayout() {
 /**
  * A DSL function which allows your component to be placed in the DSL component tree.
  */
-fun (@VaadinDsl HasComponents).addTaskForm(block: (@VaadinDsl AddTaskForm).() -> Unit = {}) = init(AddTaskForm(), block)
+fun (@VaadinDsl HasComponents).addTaskForm(block: (@VaadinDsl AddTaskForm).() -> Unit = {}) = init(
+  AddTaskForm(), block)

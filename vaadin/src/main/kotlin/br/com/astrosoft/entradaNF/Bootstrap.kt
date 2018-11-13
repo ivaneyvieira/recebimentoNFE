@@ -1,4 +1,4 @@
-package com.vaadin.pwademo
+package br.com.astrosoft.entradaNF
 
 import com.vaadin.flow.server.*
 import org.jsoup.nodes.Element

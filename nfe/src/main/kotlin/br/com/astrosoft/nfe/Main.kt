@@ -14,7 +14,7 @@ import javax.xml.xpath.XPathConstants
 import javax.xml.xpath.XPathFactory
 
 fun main(args: Array<String>) {
-  val config = Config.iniciaConfiguracoes(SP)
+  val config = Config.iniciaConfiguracoesWeb(SP)
   val chave = "4318 0893 6828 5400 0186 5500 1000 0333 7519 1155 4380".replace(" ", "")
   val retorno = NfeWeb.distribuicaoDfe(config, ConstantesUtil.TIPOS.CNPJ, "cnpj", ConstantesUtil.TIPOS.CHAVE, chave)
   println("Status:" + retorno.cStat)
@@ -31,19 +31,16 @@ fun main(args: Array<String>) {
       println("NSU:" + docZip.nsu)
       val xml = XmlUtil.gZipToXml(docZip.value)
       System.out.println("XML: $xml")
-
-
       val dbFactory = DocumentBuilderFactory.newInstance()
       val dBuilder = dbFactory.newDocumentBuilder()
       val xmlInput = InputSource(StringReader(xml))
       val doc = dBuilder.parse(xmlInput)
-
       val xpath = "/nfeProc/NFe/infNFe/det/prod"
       val xpFactory = XPathFactory.newInstance()
       val xPath = xpFactory.newXPath()
       val itemsTypeT1 = xPath.evaluate(xpath, doc, XPathConstants.NODESET) as NodeList
       for (i in 0 until itemsTypeT1.length) {
-        val item =itemsTypeT1.item(i)
+        val item = itemsTypeT1.item(i)
         val cmp1 = item.childNodes.item(1)
         println("${cmp1.nodeName}: ${item.childNodes.item(1).textContent}")
         println("cProd: ${item.childNodes.item(2).textContent}")

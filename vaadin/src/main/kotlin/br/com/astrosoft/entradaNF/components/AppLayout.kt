@@ -1,4 +1,4 @@
-package com.vaadin.pwademo.components
+package br.com.astrosoft.entradaNF.components
 
 import com.github.vok.karibudsl.flow.VaadinDsl
 import com.github.vok.karibudsl.flow.div
@@ -19,7 +19,8 @@ open class AppHeader : Component(), HasComponents, HasSize {
     }
 }
 
-fun (@VaadinDsl HasComponents).appHeader(block: (@VaadinDsl AppHeader).() -> Unit = {}) = init(AppHeader(), block)
+fun (@VaadinDsl HasComponents).appHeader(block: (@VaadinDsl AppHeader).() -> Unit = {}) = init(
+  AppHeader(), block)
 
 @Tag("app-toolbar")
 @HtmlImport("frontend://bower_components/app-layout/app-layout.html")
@@ -36,7 +37,8 @@ open class AppToolbar : Component(), HasComponents {
     }
 }
 
-fun (@VaadinDsl HasComponents).appToolbar(block: (@VaadinDsl AppToolbar).() -> Unit = {}) = init(AppToolbar(), block)
+fun (@VaadinDsl HasComponents).appToolbar(block: (@VaadinDsl AppToolbar).() -> Unit = {}) = init(
+  AppToolbar(), block)
 
 @Tag("app-drawer")
 @HtmlImport("frontend://bower_components/app-layout/app-layout.html")
@@ -47,7 +49,8 @@ class AppDrawer : Component(), HasComponents {
     }
 }
 
-fun (@VaadinDsl HasComponents).appDrawer(block: (@VaadinDsl AppDrawer).() -> Unit = {}) = init(AppDrawer(), block)
+fun (@VaadinDsl HasComponents).appDrawer(block: (@VaadinDsl AppDrawer).() -> Unit = {}) = init(
+  AppDrawer(), block)
 
 /**
  * A demo of how to use Polymer components. This particular component is the
@@ -71,4 +74,5 @@ class NavMenuItem(icon: VaadinIcon, caption: String) : Button(caption, Icon(icon
         set(value) { classNames.set("selected", value) }
 }
 
-fun (@VaadinDsl HasComponents).navMenuItem(icon: VaadinIcon, caption: String, block: (@VaadinDsl NavMenuItem).() -> Unit = {}) = init(NavMenuItem(icon, caption), block)
+fun (@VaadinDsl HasComponents).navMenuItem(icon: VaadinIcon, caption: String, block: (@VaadinDsl NavMenuItem).() -> Unit = {}) = init(
+  NavMenuItem(icon, caption), block)
