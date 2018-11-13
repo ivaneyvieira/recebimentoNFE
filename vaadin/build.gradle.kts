@@ -5,10 +5,9 @@ val vaadinonkotlin_version = "0.4.9"
 val vaadin10_version = "11.0.1"
 
 plugins {
-  kotlin("jvm") version "1.2.71"
+  kotlin("jvm") version "1.3.0"
   id("org.gretty") version "2.2.0"
-  id(
-    "io.spring.dependency-management") version "1.0.6.RELEASE"  // remove when https://github.com/gradle/gradle/issues/4417 is fixed
+  id("io.spring.dependency-management") version "1.0.6.RELEASE"
   war
 }
 
@@ -19,6 +18,7 @@ defaultTasks("clean", "build")
 repositories {
   jcenter()
   maven { setUrl("https://dl.bintray.com/mvysny/github") }
+  maven { setUrl("http://maven.vaadin.com/vaadin-addons") }
 }
 
 gretty {
@@ -30,13 +30,13 @@ dependencyManagement {
   imports { mavenBom("com.vaadin:vaadin-bom:$vaadin10_version") }
 }
 
-tasks.withType<Test> {
-  useJUnitPlatform()
-  testLogging {
+//tasks.withType<Test> {
+//  useJUnitPlatform()
+//  testLogging {
     // to see the exceptions of failed tests in Travis-CI console.
-    exceptionFormat = TestExceptionFormat.FULL
-  }
-}
+//    exceptionFormat = TestExceptionFormat.FULL
+//  }
+//}
 
 tasks.withType<KotlinCompile> {
   kotlinOptions.jvmTarget = "1.8"
@@ -44,6 +44,7 @@ tasks.withType<KotlinCompile> {
 val staging by configurations.creating
 
 dependencies {
+  compile(project(":nfe"))
   compile("com.github.vok.karibudsl:karibu-dsl-v10:$vaadinonkotlin_version")
   providedCompile("javax.servlet:javax.servlet-api:3.1.0")
   // the app-layout custom component
@@ -55,21 +56,11 @@ dependencies {
   compile("org.slf4j:slf4j-api:1.7.25")
 
   compile("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+
+  compile("com.github.appreciated:app-layout-addon:2.0.0")
   // test support
-  testCompile("com.github.kaributesting:karibu-testing-v10:0.5.2")
-  testCompile("com.github.mvysny.dynatest:dynatest-engine:0.11")
+  //testCompile("com.github.kaributesting:karibu-testing-v10:0.5.2")
+  //testCompile("com.github.mvysny.dynatest:dynatest-engine:0.11")
   // heroku app runner
   staging("com.github.jsimone:webapp-runner:9.0.11.0")
-}
-// Heroku
-tasks {
-  val copyToLib by registering(Copy::class) {
-    into("$buildDir/server")
-    from(staging) {
-      include("webapp-runner*")
-    }
-  }
-  val stage by registering {
-    dependsOn("build", copyToLib)
-  }
 }

@@ -4,12 +4,10 @@ import br.com.astrosoft.nfe.Parser.toDoc
 import br.com.astrosoft.nfe.model.NotaFiscal
 import br.com.astrosoft.nfe.model.Produto
 import br.com.astrosoft.nfe.model.Volume
-import br.com.samuelweb.nfe.Nfe
 import br.com.samuelweb.nfe.NfeWeb
 import br.com.samuelweb.nfe.dom.Enum.StatusEnum
 import br.com.samuelweb.nfe.util.ConstantesUtil
 import br.com.samuelweb.nfe.util.Estados.PI
-import br.com.samuelweb.nfe.util.Estados.SP
 import br.com.samuelweb.nfe.util.XmlUtil
 import org.w3c.dom.Document
 import org.w3c.dom.Node
@@ -19,11 +17,11 @@ import java.io.StringReader
 import javax.xml.parsers.DocumentBuilderFactory
 import javax.xml.xpath.XPathConstants
 import javax.xml.xpath.XPathFactory
-import kotlin.coroutines.experimental.buildSequence
 
 object NFE {
   fun consultaNota(cnpj: String, chave: String): NotaFiscal? {
     return consultaXML(cnpj, chave).firstOrNull()?.let { xml ->
+      println(xml)
       xmlToNota(xml)
     }
   }
@@ -68,7 +66,7 @@ object NFE {
 
   fun Document.query(xpath: String): List<Map<String, String>> {
     val doc = this
-    return buildSequence {
+    return sequence {
       val xpFactory = XPathFactory.newInstance()
       val xPath = xpFactory.newXPath()
       val itens = xPath.evaluate(xpath, doc, XPathConstants.NODESET) as NodeList
@@ -83,7 +81,7 @@ object NFE {
 
   fun Node.findMapValue(): Map<String, String> {
     val node = this
-    return buildSequence {
+    return sequence {
       val itens = node.childNodes
       for (i in 0 until itens.length) {
         val item = itens.item(i)

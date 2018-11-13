@@ -1,14 +1,13 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-  kotlin("jvm") version "1.2.71"
+  kotlin("jvm") version "1.3.0"
 }
 
 version = "unspecified"
 
 repositories {
   mavenCentral()
-
   maven(url = "http://www.autocomsistemas.com.br:8081/nexus/content/repositories/autocom/")
 }
 

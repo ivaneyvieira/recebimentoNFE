@@ -1,0 +1,4 @@
+profile-location: true
+entity-packages: br.com.astrosoft.entradaNF.model
+transactional-packages: br.com.astrosoft.entradaNF
+querybean-packages: br.com.astrosoft.entradaNF
