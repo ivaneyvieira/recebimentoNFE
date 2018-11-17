@@ -1,28 +1,27 @@
 package br.com.astrosoft.entradaNF
 
-import br.com.astrosoft.nfe.Config
 import br.com.astrosoft.nfe.NFE
 import br.com.astrosoft.nfe.model.Produto
 import br.com.astrosoft.nfe.model.Volume
-import br.com.samuelweb.nfe.util.Estados.SP
-import com.vaadin.flow.component.icon.VaadinIcon
-import com.vaadin.flow.component.orderedlayout.VerticalLayout
-import com.vaadin.flow.router.Route
+import br.com.samuelweb.nfe.util.Estados
 import com.github.appreciated.app.layout.annotations.MenuCaption
 import com.github.appreciated.app.layout.annotations.MenuIcon
 import com.github.vok.karibudsl.flow.addColumnFor
 import com.github.vok.karibudsl.flow.button
+import com.github.vok.karibudsl.flow.comboBox
 import com.github.vok.karibudsl.flow.grid
 import com.github.vok.karibudsl.flow.horizontalLayout
 import com.github.vok.karibudsl.flow.label
 import com.github.vok.karibudsl.flow.textField
+import com.vaadin.flow.component.combobox.ComboBox
 import com.vaadin.flow.component.grid.Grid
+import com.vaadin.flow.component.icon.VaadinIcon
 import com.vaadin.flow.component.notification.Notification
 import com.vaadin.flow.component.notification.Notification.Position.TOP_END
+import com.vaadin.flow.component.orderedlayout.VerticalLayout
 import com.vaadin.flow.component.textfield.TextField
-import com.vaadin.flow.data.provider.DataProvider
 import com.vaadin.flow.data.provider.ListDataProvider
-import java.lang.Exception
+import com.vaadin.flow.router.Route
 
 @Route(value = "", layout = MainAppLayout::class)
 @MenuCaption("Home")
@@ -33,23 +32,29 @@ class Tela : VerticalLayout() {
   private lateinit var gridProdutos: Grid<Produto>
   private lateinit var cnpjEmitente: TextField
   private lateinit var nomeEmitente: TextField
+  private lateinit var comboEstado: ComboBox<Estados>
 
   init {
     horizontalLayout {
       textCodigo = textField("Nota Fiscal") {
         width = "500px"
       }
+      comboEstado = comboBox("Estado"){
+        setItems(Estados.values().toList())
+      }
       button("Consulta") {
         addClickListener {
           try {
             val chave = textCodigo?.value?.replace(" ", "") ?: ""
-            val nota = NFE.consultaNota("07483654000405", chave)
+            val estado = comboEstado.value
+
+            val nota = NFE.consultaNota("07483654000405", chave, estado )
             cnpjEmitente.value = nota?.cnpjEmitente ?: ""
             nomeEmitente.value = nota?.emitente ?: ""
             gridVolumes.dataProvider = ListDataProvider(nota?.volumes.orEmpty())
             gridProdutos.dataProvider = ListDataProvider(nota?.produtos.orEmpty())
           } catch (e: Exception) {
-            Notification.show(e.message, 3000, TOP_END)
+            Notification.show(e.message,3000, TOP_END)
           }
         }
       }

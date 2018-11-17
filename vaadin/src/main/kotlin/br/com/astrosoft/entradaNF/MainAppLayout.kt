@@ -18,6 +18,7 @@ import com.vaadin.flow.component.page.Viewport
 @Push
 @Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
 class MainAppLayout : AppLayoutRouterLayout() {
+
   override fun getAppLayout(): AppLayout {
     val variant = Behaviour.LEFT_RESPONSIVE
     return AppLayoutBuilder
@@ -34,30 +35,4 @@ class MainAppLayout : AppLayoutRouterLayout() {
                      .build()
                   ).build()
   }
-
-  /*
-    private val content: Div
-
-    init {
-      appHeader {
-        appToolbar {
-          title.text = "Recebimento de Mercadoria"
-        }
-      }
-      appDrawer {
-        navMenuItem(VaadinIcon.BARCODE, "Recebimento")
-        navMenuItem(VaadinIcon.SEARCH, "Consultar notas")
-        navMenuItem(VaadinIcon.CUBES, "Etiquetas de Volume")
-        navMenuItem(VaadinIcon.CUBE, "Etiquetas de produtos")
-      }
-      content = div {
-        setSizeFull()
-        classNames.add("app-content")
-      }
-    }
-
-    override fun showRouterLayoutContent(content: HasElement) {
-      this.content.element.appendChild(content.element)
-    }
-    */
 }

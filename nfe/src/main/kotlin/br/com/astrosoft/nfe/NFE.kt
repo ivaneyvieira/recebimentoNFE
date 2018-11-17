@@ -7,7 +7,7 @@ import br.com.astrosoft.nfe.model.Volume
 import br.com.samuelweb.nfe.NfeWeb
 import br.com.samuelweb.nfe.dom.Enum.StatusEnum
 import br.com.samuelweb.nfe.util.ConstantesUtil
-import br.com.samuelweb.nfe.util.Estados.PI
+import br.com.samuelweb.nfe.util.Estados
 import br.com.samuelweb.nfe.util.XmlUtil
 import org.w3c.dom.Document
 import org.w3c.dom.Node
@@ -17,10 +17,13 @@ import java.io.StringReader
 import javax.xml.parsers.DocumentBuilderFactory
 import javax.xml.xpath.XPathConstants
 import javax.xml.xpath.XPathFactory
+import br.com.samuelweb.nfe.Nfe
+
+
 
 object NFE {
-  fun consultaNota(cnpj: String, chave: String): NotaFiscal? {
-    return consultaXML(cnpj, chave).firstOrNull()?.let { xml ->
+  fun consultaNota(cnpj: String, chave: String, estado: Estados): NotaFiscal? {
+    return consultaXML(cnpj, chave, estado).firstOrNull()?.let { xml ->
       println(xml)
       xmlToNota(xml)
     }
@@ -52,8 +55,13 @@ object NFE {
     }
   }
 
-  fun consultaXML(cnpj: String, chave: String): List<String> {
-    val config = Config.iniciaConfiguracoesWeb(PI)
+  fun consultaXML(cnpj: String, chave: String, estado: Estados): List<String> {
+    val config = Config.iniciaConfiguracoesWeb(estado)
+    val consulta = NfeWeb.consultaXml(config, chave, ConstantesUtil.NFE)
+    System.out.println("Status:" + consulta?.cStat)
+    System.out.println("Motivo:" + consulta?.xMotivo)
+    System.out.println("Data:" + consulta?.protNFe?.infProt?.dhRecbto)
+
     val retorno = NfeWeb.distribuicaoDfe(config, ConstantesUtil.TIPOS.CNPJ,
                                          cnpj, ConstantesUtil.TIPOS.CHAVE, chave)
     return if (StatusEnum.DOC_LOCALIZADO_PARA_DESTINATARIO.codigo == retorno.cStat) {

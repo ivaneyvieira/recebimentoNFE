@@ -26,8 +26,8 @@ object Config {
     return ConfiguracoesWebNfe.iniciaConfiguracoes(estado,
                                                    ConstantesUtil.AMBIENTE.PRODUCAO,
                                                    certificado,
-                                                   MethodHandles.lookup().lookupClass().getResource("/schemas").path,
-                                                   true)
+                                                   schemaDir,
+                                                   false)
   }
 
   fun iniciaConfiguracoes(estado : Estados): ConfiguracoesIniciaisNfe {
