@@ -12,6 +12,7 @@ repositories {
 }
 
 dependencies {
+  compile(project(":model"))
   compile(kotlin("stdlib-jdk8"))
   compile("br.com.samuelweb:java-nfe:4.00.8")
   compile("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.9.7")

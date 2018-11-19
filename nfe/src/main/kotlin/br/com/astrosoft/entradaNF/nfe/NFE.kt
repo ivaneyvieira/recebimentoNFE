@@ -1,9 +1,9 @@
-package br.com.astrosoft.nfe
+package br.com.astrosoft.entradaNF.nfe
 
-import br.com.astrosoft.nfe.Parser.toDoc
-import br.com.astrosoft.nfe.model.NotaFiscal
-import br.com.astrosoft.nfe.model.Produto
-import br.com.astrosoft.nfe.model.Volume
+import br.com.astrosoft.entradaNF.nfe.Parser.toDoc
+import br.com.astrosoft.entradaNF.model.NotaFiscal
+import br.com.astrosoft.entradaNF.model.Produto
+import br.com.astrosoft.entradaNF.model.Volume
 import br.com.samuelweb.nfe.NfeWeb
 import br.com.samuelweb.nfe.dom.Enum.StatusEnum
 import br.com.samuelweb.nfe.util.ConstantesUtil
@@ -25,11 +25,11 @@ object NFE {
   fun consultaNota(cnpj: String, chave: String, estado: Estados): NotaFiscal? {
     return consultaXML(cnpj, chave, estado).firstOrNull()?.let { xml ->
       println(xml)
-      xmlToNota(xml)
+      xmlToNota(chave, xml)
     }
   }
 
-  private fun xmlToNota(xml: String): NotaFiscal? {
+  private fun xmlToNota(chave : String, xml: String): NotaFiscal? {
     return toDoc(xml)?.let { doc ->
       val mapIde = doc
         .query("/nfeProc/NFe/infNFe/ide")
@@ -42,16 +42,18 @@ object NFE {
         .findOne()
       val produtos = doc.query("/nfeProc/NFe/infNFe/det/prod").toProdutos()
       val volumes = doc.query("/nfeProc/NFe/infNFe/transp/vol").toVolumes()
-      NotaFiscal(
+      val nota = NotaFiscal(
+        chave = chave,
         nfno = mapIde["nNF"] ?: "",
         nfse = mapIde["serie"] ?: "",
         cnpjDestinatario = mapDest["CNPJ"] ?: "",
         cnpjEmitente = mapEmit["CNPJ"] ?: "",
         destinatario = mapDest["xNome"] ?: "",
-        emitente = mapEmit["xNome"] ?: "",
-        produtos = produtos,
-        volumes = volumes
-                )
+        emitente = mapEmit["xNome"] ?: ""
+                                                            )
+      nota.produtos =produtos
+      nota.volumes = volumes
+      nota
     }
   }
 
@@ -107,7 +109,7 @@ private fun     List<Map<String, String>>.toVolumes(): List<Volume> {
       especie = map["esp"] ?: "",
       peseoBruto = map["pesoB"]?.toDoubleOrNull() ?: 0.00,
       pesoLiquido = map["pesoL"]?.toDoubleOrNull() ?: 0.00
-          )
+                                           )
   }
 }
 
@@ -120,7 +122,7 @@ private fun List<Map<String, String>>.toProdutos(): List<Produto> {
       quantidade = map["qCom"]?.toDoubleOrNull() ?: 0.00,
       unidade = map["uCom"] ?: "",
       valorUnitario = map["vUnCom"]?.toDoubleOrNull() ?: 0.00
-           )
+                                            )
   }
 }
 

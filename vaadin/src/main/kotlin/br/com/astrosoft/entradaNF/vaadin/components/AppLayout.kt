@@ -1,4 +1,4 @@
-package br.com.astrosoft.entradaNF.components
+package br.com.astrosoft.entradaNF.vaadin.components
 
 import com.github.vok.karibudsl.flow.VaadinDsl
 import com.github.vok.karibudsl.flow.div

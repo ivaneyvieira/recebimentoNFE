@@ -1,4 +1,4 @@
-package br.com.astrosoft.nfe
+package br.com.astrosoft.entradaNF.nfe
 
 import br.com.samuelweb.nfe.NfeWeb
 import br.com.samuelweb.nfe.dom.Enum.StatusEnum

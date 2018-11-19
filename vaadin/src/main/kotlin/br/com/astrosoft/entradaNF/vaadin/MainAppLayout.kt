@@ -1,4 +1,4 @@
-package br.com.astrosoft.entradaNF
+package br.com.astrosoft.entradaNF.vaadin
 
 import com.github.appreciated.app.layout.behaviour.AppLayout
 import com.github.appreciated.app.layout.behaviour.Behaviour
@@ -11,14 +11,12 @@ import com.github.appreciated.app.layout.design.AppLayoutDesign
 import com.github.appreciated.app.layout.entity.Section.HEADER
 import com.github.appreciated.app.layout.router.AppLayoutRouterLayout
 import com.vaadin.flow.component.icon.VaadinIcon
-import com.vaadin.flow.component.icon.VaadinIcon.COG
 import com.vaadin.flow.component.page.Push
 import com.vaadin.flow.component.page.Viewport
 
 @Push
 @Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
 class MainAppLayout : AppLayoutRouterLayout() {
-
   override fun getAppLayout(): AppLayout {
     val variant = Behaviour.LEFT_RESPONSIVE
     return AppLayoutBuilder
@@ -26,7 +24,8 @@ class MainAppLayout : AppLayoutRouterLayout() {
       .withTitle("Entrada de Mercadoria")
       .withAppBar(AppBarBuilder.get().build())
       .withDesign(AppLayoutDesign.CUSTOM)
-      .withAppMenu(LeftAppMenuBuilder.get()
+      .withAppMenu(LeftAppMenuBuilder
+                     .get()
                      .addToSection(MenuHeaderComponent("Menu Principal", "Versão 1.0", null), HEADER)
                      .add(LeftNavigationComponent("Entrada", VaadinIcon.BARCODE.create(), Tela::class.java))
                      .add(LeftNavigationComponent("Consulta", VaadinIcon.SEARCH.create(), Tela::class.java))

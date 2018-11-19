@@ -29,20 +29,17 @@ gretty {
 dependencyManagement {
   imports { mavenBom("com.vaadin:vaadin-bom:$vaadin10_version") }
 }
-
 //tasks.withType<Test> {
 //  useJUnitPlatform()
 //  testLogging {
-    // to see the exceptions of failed tests in Travis-CI console.
+// to see the exceptions of failed tests in Travis-CI console.
 //    exceptionFormat = TestExceptionFormat.FULL
 //  }
 //}
-
 tasks.withType<KotlinCompile> {
   kotlinOptions.jvmTarget = "1.8"
 }
-val staging by configurations.creating
-
+//val staging by configurations.creating
 dependencies {
   compile(project(":nfe"))
   compile("com.github.vok.karibudsl:karibu-dsl-v10:$vaadinonkotlin_version")
@@ -62,5 +59,5 @@ dependencies {
   //testCompile("com.github.kaributesting:karibu-testing-v10:0.5.2")
   //testCompile("com.github.mvysny.dynatest:dynatest-engine:0.11")
   // heroku app runner
-  staging("com.github.jsimone:webapp-runner:9.0.11.0")
+  // staging("com.github.jsimone:webapp-runner:9.0.11.0")
 }

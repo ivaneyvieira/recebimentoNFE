@@ -1,4 +1,4 @@
-package br.com.astrosoft.nfe
+package br.com.astrosoft.entradaNF.nfe
 
 import br.com.samuelweb.certificado.Certificado
 import br.com.samuelweb.certificado.CertificadoService
@@ -38,6 +38,7 @@ object Config {
   }
 
   fun certifidoA1Pfx(): Certificado {
-    return CertificadoService.certificadoPfx(caminhoCertificado, senha)
+    return CertificadoService.certificadoPfx(caminhoCertificado,
+                                             senha)
   }
 }

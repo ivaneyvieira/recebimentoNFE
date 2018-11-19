@@ -1,8 +1,8 @@
-package br.com.astrosoft.entradaNF
+package br.com.astrosoft.entradaNF.vaadin
 
-import br.com.astrosoft.nfe.NFE
-import br.com.astrosoft.nfe.model.Produto
-import br.com.astrosoft.nfe.model.Volume
+import br.com.astrosoft.entradaNF.nfe.NFE
+import br.com.astrosoft.entradaNF.model.Produto
+import br.com.astrosoft.entradaNF.model.Volume
 import br.com.samuelweb.nfe.util.Estados
 import com.github.appreciated.app.layout.annotations.MenuCaption
 import com.github.appreciated.app.layout.annotations.MenuIcon
@@ -48,7 +48,7 @@ class Tela : VerticalLayout() {
             val chave = textCodigo?.value?.replace(" ", "") ?: ""
             val estado = comboEstado.value
 
-            val nota = NFE.consultaNota("07483654000405", chave, estado )
+            val nota = NFE.consultaNota("07483654000405", chave, estado)
             cnpjEmitente.value = nota?.cnpjEmitente ?: ""
             nomeEmitente.value = nota?.emitente ?: ""
             gridVolumes.dataProvider = ListDataProvider(nota?.volumes.orEmpty())
