@@ -1,5 +1,6 @@
 package br.com.astrosoft.entradaNF.model
 
+import br.com.astrosoft.entradaNF.model.finder.NotaFiscalFinder
 import br.com.astrosoft.framework.model.BaseModel
 import io.ebean.annotation.Length
 import javax.persistence.CascadeType.MERGE
@@ -30,16 +31,18 @@ class NotaFiscal(
                 ) : BaseModel() {
   @ManyToOne(cascade = [PERSIST, MERGE, REFRESH])
   var loja: Loja? = null
-  @OneToMany(mappedBy = "notas", cascade = [PERSIST, MERGE, REFRESH])
+  @OneToMany(mappedBy = "nota", cascade = [PERSIST, MERGE, REFRESH])
   var produtos: List<Produto> = emptyList()
     set(value) {
       field = value
       value.forEach { it.nota = this }
     }
-  @OneToMany(mappedBy = "notas", cascade = [PERSIST, MERGE, REFRESH])
+  @OneToMany(mappedBy = "nota", cascade = [PERSIST, MERGE, REFRESH])
   var volumes: List<Volume> = emptyList()
     set(value) {
       field = value
       value.forEach { it.nota = this }
     }
+
+  companion object Find : NotaFiscalFinder()
 }

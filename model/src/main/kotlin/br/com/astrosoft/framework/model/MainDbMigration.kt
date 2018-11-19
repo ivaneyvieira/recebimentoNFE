@@ -18,8 +18,9 @@ object MainDbMigration {
     migration.setPlatform(Platform.MYSQL)
     //migration.setVersion("1.12")
     System.setProperty("disableTestProperties", "true")
+    migration.setPathToResources("./model/src/main/resources")
     migration.generateMigration()
-    
+
     // starting EbeanServer triggers the apply of migrations
     // ... when ebean.migration.run=true
     //Transaction.server

@@ -12,13 +12,13 @@ object MainQueryBeanGenerator {
     
     val config = GeneratorConfig()
     config.lang = "kt"
-    config.classesDirectory = "./out/production/classes/"
-    //config.classesDirectory = "./build/classes/kotlin/main/"
-    config.destDirectory = "./src/main/kotlin"
-    config.destResourceDirectory = "./src/main/resources"
+    config.classesDirectory = "./model/out/production/classes/"
+    //config.classesDirectory = "./model/build/classes/kotlin/main/"
+    config.destDirectory = "./model/src/main/kotlin"
+    config.destResourceDirectory = "./model/src/main/resources"
   
-    config.entityBeanPackage = "br.com.engecopi.estoque.model"
-    config.destPackage = "br.com.engecopi.estoque.model.query"
+    config.entityBeanPackage = "br.com.astrosoft.entradaNF.model"
+    config.destPackage = "br.com.astrosoft.entradaNF.model.query"
   
     config.isOverwriteExistingFinders = true
     
@@ -28,6 +28,5 @@ object MainQueryBeanGenerator {
     // Additionally generate 'finder's
     generator.generateFinders()
     generator.modifyEntityBeansAddFinderField()
-    
   }
 }

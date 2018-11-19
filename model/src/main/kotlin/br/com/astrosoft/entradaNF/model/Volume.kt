@@ -1,5 +1,6 @@
 package br.com.astrosoft.entradaNF.model
 
+import br.com.astrosoft.entradaNF.model.finder.VolumeFinder
 import br.com.astrosoft.framework.model.BaseModel
 import io.ebean.annotation.Length
 import javax.persistence.CascadeType.MERGE
@@ -24,4 +25,5 @@ class Volume(
   @ManyToOne(cascade = [PERSIST, MERGE, REFRESH])
   var nota: NotaFiscal? = null
 
+  companion object Find : VolumeFinder()
 }

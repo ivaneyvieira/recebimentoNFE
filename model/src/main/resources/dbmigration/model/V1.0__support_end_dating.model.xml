@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<migration xmlns="http://ebean-orm.github.io/xml/ns/dbmigration">
+    <changeSet type="apply">
+        <createTable name="lojas" identityType="identity" pkName="pk_lojas">
+            <column name="id" type="bigint" primaryKey="true"/>
+            <column name="numero" type="integer" notnull="true"/>
+            <column name="sigla" type="varchar(2)" notnull="true"/>
+            <column name="created_at" type="timestamp" notnull="true"/>
+            <column name="updated_at" type="timestamp" notnull="true"/>
+            <column name="version" type="integer" notnull="true"/>
+            <uniqueConstraint name="uq_lojas_numero" columnNames="numero" oneToOne="false" nullableColumns=""/>
+        </createTable>
+        <createTable name="notas" identityType="identity" pkName="pk_notas">
+            <column name="id" type="bigint" primaryKey="true"/>
+            <column name="loja_id" type="bigint" references="lojas.id" foreignKeyName="fk_notas_loja_id" foreignKeyIndex="ix_notas_loja_id"/>
+            <column name="chave" type="varchar(50)" notnull="true"/>
+            <column name="nfno" type="varchar(32)" notnull="true"/>
+            <column name="nfse" type="varchar(4)" notnull="true"/>
+            <column name="cnpj_emitente" type="varchar(20)" notnull="true"/>
+            <column name="emitente" type="varchar(100)" notnull="true"/>
+            <column name="cnpj_destinatario" type="varchar(20)" notnull="true"/>
+            <column name="destinatario" type="varchar(100)" notnull="true"/>
+            <column name="created_at" type="timestamp" notnull="true"/>
+            <column name="updated_at" type="timestamp" notnull="true"/>
+            <column name="version" type="integer" notnull="true"/>
+        </createTable>
+        <createTable name="produtos" identityType="identity" pkName="pk_produtos">
+            <column name="id" type="bigint" primaryKey="true"/>
+            <column name="nota_id" type="bigint" references="notas.id" foreignKeyName="fk_produtos_nota_id" foreignKeyIndex="ix_produtos_nota_id"/>
+            <column name="codigo" type="varchar(60)" notnull="true"/>
+            <column name="ean" type="varchar(14)" notnull="true"/>
+            <column name="descricao" type="varchar(120)" notnull="true"/>
+            <column name="quantidade" type="double(10,4)" notnull="true"/>
+            <column name="valor_unitario" type="double(10,2)" notnull="true"/>
+            <column name="unidade" type="varchar(6)" notnull="true"/>
+            <column name="created_at" type="timestamp" notnull="true"/>
+            <column name="updated_at" type="timestamp" notnull="true"/>
+            <column name="version" type="integer" notnull="true"/>
+        </createTable>
+        <createTable name="volumes" identityType="identity" pkName="pk_volumes">
+            <column name="id" type="bigint" primaryKey="true"/>
+            <column name="nota_id" type="bigint" references="notas.id" foreignKeyName="fk_volumes_nota_id" foreignKeyIndex="ix_volumes_nota_id"/>
+            <column name="quantidade" type="integer" notnull="true"/>
+            <column name="especie" type="varchar(60)" notnull="true"/>
+            <column name="peso_liquido" type="double(10,4)" notnull="true"/>
+            <column name="peseo_bruto" type="double(10,4)" notnull="true"/>
+            <column name="created_at" type="timestamp" notnull="true"/>
+            <column name="updated_at" type="timestamp" notnull="true"/>
+            <column name="version" type="integer" notnull="true"/>
+        </createTable>
+    </changeSet>
+</migration>

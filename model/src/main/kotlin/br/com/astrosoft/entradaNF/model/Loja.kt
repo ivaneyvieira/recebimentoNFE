@@ -1,5 +1,6 @@
 package br.com.astrosoft.entradaNF.model
 
+import br.com.astrosoft.entradaNF.model.finder.LojaFinder
 import br.com.astrosoft.framework.model.BaseModel
 import io.ebean.annotation.Index
 import io.ebean.annotation.Length
@@ -20,4 +21,6 @@ class Loja(
           ) : BaseModel(){
   @OneToMany(mappedBy = "loja", cascade = [PERSIST, MERGE, REFRESH])
   var notas: List<NotaFiscal> = emptyList()
+
+  companion object Find : LojaFinder()
 }
