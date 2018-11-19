@@ -26,11 +26,10 @@ tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile::class.java).all 
 }
 
 dependencies {
-  compile(kotlin("stdlib-jdk8"))
-  compile("io.ebean:ebean:11.24.1")
-  compile("io.ebean:querybean-generator:11.19.1")
-  compile("io.ebean:ebean-querybean:11.20.1")
-  compile("io.ebean:ebean-annotation:4.2")
-  compile("io.ebean.tools:finder-generator:4.2.2")
-  compile("org.jetbrains.kotlin:kotlin-reflect:1.3.0")
+  compile(project(":framework"))
+
+  compile("br.com.samuelweb:java-nfe:4.00.8")
+  compile("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.9.7")
+  compile("com.fasterxml.jackson.module:jackson-module-kotlin:2.9.7")
+  compile("org.apache.commons:commons-lang3:3.8.1")
 }

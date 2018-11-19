@@ -8,7 +8,7 @@
  */
 
 rootProject.name = "recebimentoNFE"
+include("framework")
 include("vaadin")
-include("nfe")
 include("model")
 include("viewmodel")

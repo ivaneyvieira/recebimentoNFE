@@ -53,6 +53,7 @@ class Tela : VerticalLayout() {
             nomeEmitente.value = nota?.emitente ?: ""
             gridVolumes.dataProvider = ListDataProvider(nota?.volumes.orEmpty())
             gridProdutos.dataProvider = ListDataProvider(nota?.produtos.orEmpty())
+            nota?.save()
           } catch (e: Exception) {
             Notification.show(e.message,3000, TOP_END)
           }

@@ -17,8 +17,10 @@ class Loja(
   @Index(unique = true)
   var numero: Int = 0,
   @Length(2)
-  var sigla: String = ""
-          ) : BaseModel(){
+  var sigla: String = "",
+  @Length(20)
+  var cnpj: String = ""
+          ) : BaseModel() {
   @OneToMany(mappedBy = "loja", cascade = [PERSIST, MERGE, REFRESH])
   var notas: List<NotaFiscal> = emptyList()
 

@@ -33,6 +33,7 @@ class QLoja : TQRootBean<Loja, QLoja> {
   lateinit var notas: QAssocNotaFiscal<QLoja>
   lateinit var numero: PInteger<QLoja>
   lateinit var sigla: PString<QLoja>
+  lateinit var cnpj: PString<QLoja>
 
 
   /**

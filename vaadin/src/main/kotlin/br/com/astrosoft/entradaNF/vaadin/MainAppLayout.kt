@@ -28,9 +28,9 @@ class MainAppLayout : AppLayoutRouterLayout() {
                      .get()
                      .addToSection(MenuHeaderComponent("Menu Principal", "Versão 1.0", null), HEADER)
                      .add(LeftNavigationComponent("Entrada", VaadinIcon.BARCODE.create(), Tela::class.java))
-                     .add(LeftNavigationComponent("Consulta", VaadinIcon.SEARCH.create(), Tela::class.java))
-                     .add(LeftNavigationComponent("Etiqueta de Volumes", VaadinIcon.CUBES.create(), Tela::class.java))
-                     .add(LeftNavigationComponent("Etiquetas de Produtos", VaadinIcon.CUBE.create(), Tela::class.java))
+//                     .add(LeftNavigationComponent("Consulta", VaadinIcon.SEARCH.create(), Tela::class.java))
+  //                   .add(LeftNavigationComponent("Etiqueta de Volumes", VaadinIcon.CUBES.create(), Tela::class.java))
+    //                 .add(LeftNavigationComponent("Etiquetas de Produtos", VaadinIcon.CUBE.create(), Tela::class.java))
                      .build()
                   ).build()
   }
