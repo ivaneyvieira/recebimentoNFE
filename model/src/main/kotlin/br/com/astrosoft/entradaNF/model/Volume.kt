@@ -21,9 +21,11 @@ class Volume(
   val pesoLiquido: Double,
   @Column(precision = 10, scale = 4)
   val peseoBruto: Double
-                 ) : BaseModel(){
+            ) : BaseModel() {
   @ManyToOne(cascade = [PERSIST, MERGE, REFRESH])
   var nota: NotaFiscal? = null
 
   companion object Find : VolumeFinder()
 }
+
+
